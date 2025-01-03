@@ -10,7 +10,9 @@
 </script>
 
 <div class="flex h-svh flex-col">
-	<header class="h-24 w-full border-b-8 border-white bg-black">HEADER</header>
+	<header class="flex h-24 w-full flex-row justify-center border-b-8 border-white bg-black">
+		<h1 class="self-center font-sans text-5xl font-thin text-white">one by sisyphi</h1>
+	</header>
 	<div
 		class="bg-moon h-full flex-1 bg-black"
 		style="background-position: {`${-Math.round(bgOffset * 100) / 100}px ${-Math.round(bgOffset * 100) / 100}px`};"
