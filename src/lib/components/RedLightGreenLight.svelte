@@ -80,7 +80,7 @@
 
 <div
 	id="container"
-	class=" flex h-fit flex-col gap-8 border-8 border-white bg-black p-8
+	class="flex h-fit flex-col gap-8 border-8 border-white bg-black p-8
 	{isGameLost || isGameWon
 		? ''
 		: Math.round((val / maxVal) * 100) > 75
@@ -103,11 +103,11 @@
 	</div>
 	<div
 		id="progress-container"
-		class="mx-auto flex h-64 w-fit flex-col-reverse border-8 border-white p-2"
+		class="w-fit flex flex-col-reverse h-64 p-2 mx-auto border-8 border-white"
 	>
 		<div
 			id="progress-val"
-			class="w-4 bg-white transition-all"
+			class="w-4 transition-all bg-white"
 			style="height: {Math.min(Math.round((val / maxVal) * 100), 100)}%;"
 		></div>
 	</div>
@@ -120,7 +120,7 @@
 			class="font-sans text-3xl font-thin
 			{isKeyDown ? 'text-black' : 'text-white'}"
 		>
-			{props.key}
+			{props.key.toUpperCase()}
 		</button>
 	</div>
 </div>
