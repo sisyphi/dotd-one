@@ -7,9 +7,17 @@
 		intervalRange?: number;
 		timer?: number;
 		test?: number;
+		isGameWon: boolean;
 	};
 
-	let { maxVal = 5, minInterval = 1, intervalRange = 3, timer = 2, ...props }: PropsType = $props();
+	let {
+		key = 'j',
+		maxVal = 5,
+		minInterval = 1,
+		intervalRange = 3,
+		timer = 2,
+		isGameWon = $bindable(false)
+	}: PropsType = $props();
 
 	let isKeyDown: boolean = $state(false);
 	let val: number = $state(0);
@@ -17,25 +25,24 @@
 	let isEyeOpen: boolean = $state(true);
 
 	let isGameLost: boolean = $state(false);
-	let isGameWon: boolean = $state(false);
 
 	let eyeCooldown: number = $state(timer);
 
 	function handleKeydown(event: { key: any }) {
-		if (event.key === props.key) {
+		if (event.key === key) {
 			isKeyDown = true;
 		}
 	}
 
 	function handleKeyup(event: { key: any }) {
-		if (event.key === props.key) {
+		if (event.key === key) {
 			isKeyDown = false;
 		}
 	}
 
 	setInterval(() => {
 		if (!isGameLost && !isGameWon) {
-			if (isKeyDown) val += 0.1;
+			if (isKeyDown) val += 0.5;
 		}
 	}, 100);
 
@@ -60,7 +67,10 @@
 				isGameLost = true;
 			}
 		}
-		if (val >= maxVal) isGameWon = true;
+		if (val >= maxVal) {
+			isGameWon = true;
+			console.log('won');
+		}
 	});
 
 	let eyeLidStyle = $state('top-1/2 size-24');
@@ -120,7 +130,7 @@
 			class="font-sans text-3xl font-thin
 			{isKeyDown ? 'text-black' : 'text-white'}"
 		>
-			{props.key.toUpperCase()}
+			{key.toUpperCase()}
 		</button>
 	</div>
 </div>
