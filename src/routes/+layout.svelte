@@ -5,29 +5,38 @@
 	let bgOffset: number = $state(0);
 
 	setInterval(() => {
-		bgOffset = (bgOffset + 0.1) % 120;
+		bgOffset = (bgOffset + 0.1) % 100;
 	}, 0.1);
 </script>
 
 <div class="flex h-svh flex-col">
 	<header class="flex h-24 w-full flex-row justify-center border-b-8 border-white bg-black">
-		<h1 class="self-center font-sans text-5xl font-thin text-white">one by sisyphi</h1>
+		<h1 class="self-center font-sans text-5xl font-thin text-white">
+			{'ONE'}<span class="text-2xl">{' by sisyphi'}</span>
+		</h1>
 	</header>
 	<div
-		class="bg-moon h-full flex-1 bg-black"
-		style="background-position: {`${-Math.round(bgOffset * 100) / 100}px ${-Math.round(bgOffset * 100) / 100}px`};"
+		class="bg-triangle h-full flex-1 bg-black"
+		style="background-position: {`${Math.round(bgOffset * 100) / 100}px ${Math.round(bgOffset * 100) / 100}px`};"
 	>
 		{@render children()}
 	</div>
-	<footer class="h-24 w-full border-t-8 border-white bg-black">FOOTER</footer>
+	<footer class="h-24 w-full border-t-8 border-white bg-black"></footer>
 </div>
 
 <style>
+	.bg-polka {
+		background-color: #000000;
+		opacity: 1;
+		background-image: radial-gradient(#818181 2px, transparent 2px),
+			radial-gradient(#818181 2px, #000000 2px);
+		background-size: 100px 100px;
+	}
 	.bg-diagonal {
 		background-color: #000000;
 		opacity: 1;
 		background: repeating-linear-gradient(-45deg, #363636, #363636 3px, #000000 3px, #000000 17px);
-		background-size: 25%;
+		background-size: 24px;
 	}
 
 	.bg-vert-lines {
@@ -48,51 +57,51 @@
 		opacity: 1;
 		background-image: linear-gradient(
 				30deg,
-				#363636 12%,
+				#252525 12%,
 				transparent 12.5%,
 				transparent 87%,
-				#363636 87.5%,
-				#363636
+				#252525 87.5%,
+				#252525
 			),
 			linear-gradient(
 				150deg,
-				#363636 12%,
+				#252525 12%,
 				transparent 12.5%,
 				transparent 87%,
-				#363636 87.5%,
-				#363636
+				#252525 87.5%,
+				#252525
 			),
 			linear-gradient(
 				30deg,
-				#363636 12%,
+				#252525 12%,
 				transparent 12.5%,
 				transparent 87%,
-				#363636 87.5%,
-				#363636
+				#252525 87.5%,
+				#252525
 			),
 			linear-gradient(
 				150deg,
-				#363636 12%,
+				#252525 12%,
 				transparent 12.5%,
 				transparent 87%,
-				#363636 87.5%,
-				#363636
+				#252525 87.5%,
+				#252525
 			),
 			linear-gradient(
 				60deg,
-				#36363677 25%,
+				#25252577 25%,
 				transparent 25.5%,
 				transparent 75%,
-				#36363677 75%,
-				#36363677
+				#25252577 75%,
+				#25252577
 			),
 			linear-gradient(
 				60deg,
-				#36363677 25%,
+				#25252577 25%,
 				transparent 25.5%,
 				transparent 75%,
-				#36363677 75%,
-				#36363677
+				#25252577 75%,
+				#25252577
 			);
 		background-size: 80px 140px;
 		background-position:
@@ -114,5 +123,42 @@
 			#000000 50%
 		);
 		background-size: 120px 120px;
+	}
+
+	.bg-triangle {
+		background-color: #000000;
+		opacity: 1;
+		background-image: linear-gradient(-45deg, #000000, #000000 50%, #252525 50%, #252525);
+		background-size: 100px 100px;
+	}
+
+	.bg-cross {
+		background-color: #e5e5f7;
+		opacity: 0.8;
+		background:
+			radial-gradient(
+				circle,
+				transparent 20%,
+				#e5e5f7 20%,
+				#e5e5f7 80%,
+				transparent 80%,
+				transparent
+			),
+			radial-gradient(
+					circle,
+					transparent 20%,
+					#e5e5f7 20%,
+					#e5e5f7 80%,
+					transparent 80%,
+					transparent
+				)
+				25px 25px,
+			linear-gradient(#444cf7 2px, transparent 2px) 0 -1px,
+			linear-gradient(90deg, #444cf7 2px, #e5e5f7 2px) -1px 0;
+		background-size:
+			50px 50px,
+			50px 50px,
+			25px 25px,
+			25px 25px;
 	}
 </style>

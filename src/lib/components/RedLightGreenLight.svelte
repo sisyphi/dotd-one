@@ -1,6 +1,15 @@
 <script lang="ts">
 	// import { gsap } from 'gsap/dist/gsap';
-	let { key, maxVal = 5, minInterval = 1, intervalRange = 3, timer = 2 } = $props();
+	type PropsType = {
+		key: string;
+		maxVal?: number;
+		minInterval?: number;
+		intervalRange?: number;
+		timer?: number;
+		test?: number;
+	};
+
+	let { maxVal = 5, minInterval = 1, intervalRange = 3, timer = 2, ...props }: PropsType = $props();
 
 	let isKeyDown: boolean = $state(false);
 	let val: number = $state(0);
@@ -13,13 +22,13 @@
 	let eyeCooldown: number = $state(timer);
 
 	function handleKeydown(event: { key: any }) {
-		if (event.key === key) {
+		if (event.key === props.key) {
 			isKeyDown = true;
 		}
 	}
 
 	function handleKeyup(event: { key: any }) {
-		if (event.key === key) {
+		if (event.key === props.key) {
 			isKeyDown = false;
 		}
 	}
@@ -57,10 +66,8 @@
 	let eyeLidStyle = $state('top-1/2 size-24');
 
 	$effect(() => {
-		if (isGameLost) {
+		if (isGameLost || isGameWon) {
 			eyeLidStyle = '-top-full size-24';
-		} else if (isGameWon) {
-			eyeLidStyle = 'top-1/2 size-24';
 		} else if (isEyeOpen) {
 			eyeLidStyle = '-top-1 size-32';
 		} else {
@@ -74,10 +81,15 @@
 <div id="container" class="flex h-fit flex-col gap-8 border-8 border-white bg-black p-8">
 	<div
 		id="eye"
-		class="relative mx-auto size-24 overflow-hidden rounded-full border-8 border-white bg-white p-4"
+		class="relative mx-auto size-24 overflow-hidden rounded-full border-8 border-white p-4
+		{isGameWon ? 'bg-black' : 'bg-white'}"
 	>
 		<div id="eye-lid" class="eye-lid {eyeLidStyle}"></div>
-		<div id="eye-ball" class="eye-ball"></div>
+		<div
+			id="eye-ball"
+			class="eye-ball
+			{isGameWon ? 'top-1/2 size-16 bg-white' : 'top-[60%] size-12 bg-black'}"
+		></div>
 	</div>
 	<div
 		id="progress-container"
@@ -91,13 +103,15 @@
 	</div>
 	<div
 		id="btn"
-		class="mx-auto flex size-16 flex-col justify-center border-8 border-white {isGameWon
-			? 'bg-white'
-			: ''}  {isKeyDown && !isGameWon ? 'translate-y-2 bg-white' : ''}"
+		class="mx-auto flex size-16 flex-col justify-center border-8 border-white
+		{isKeyDown ? 'translate-y-0 bg-white' : '-translate-y-2 bg-black'}"
 	>
-		<button class="font-mono text-3xl {isKeyDown && !isGameWon ? 'text-black' : 'text-white'}"
-			>{key}</button
+		<button
+			class="font-sans text-3xl font-thin
+			{isKeyDown ? 'text-black' : 'text-white'}"
 		>
+			{props.key}
+		</button>
 	</div>
 </div>
 
@@ -114,14 +128,11 @@
 	}
 
 	.eye-ball {
-		background-color: black;
-		width: 3rem;
-		height: 3rem;
 		border-radius: 100%;
-		top: 60%;
 		left: 50%;
 		position: absolute;
 		transform: translate(-50%, -50%);
 		z-index: 1;
+		transition: 0.35s all;
 	}
 </style>
