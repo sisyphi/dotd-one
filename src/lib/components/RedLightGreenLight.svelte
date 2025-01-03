@@ -78,7 +78,17 @@
 
 <svelte:window onkeydown={handleKeydown} onkeyup={handleKeyup} />
 
-<div id="container" class="flex h-fit flex-col gap-8 border-8 border-white bg-black p-8">
+<div
+	id="container"
+	class=" flex h-fit flex-col gap-8 border-8 border-white bg-black p-8
+	{isGameLost || isGameWon
+		? ''
+		: Math.round((val / maxVal) * 100) > 75
+			? 'strong-hover-shake'
+			: Math.round((val / maxVal) * 100) > 50
+				? 'weak-hover-shake'
+				: ''}"
+>
 	<div
 		id="eye"
 		class="relative mx-auto size-24 overflow-hidden rounded-full border-8 border-white p-4
@@ -134,5 +144,31 @@
 		transform: translate(-50%, -50%);
 		z-index: 1;
 		transition: 0.35s all;
+	}
+
+	.weak-hover-shake {
+		animation: tilt-shaking 0.5s infinite;
+	}
+
+	.strong-hover-shake {
+		animation: tilt-shaking 0.25s infinite;
+	}
+
+	@keyframes tilt-shaking {
+		0% {
+			transform: rotate(0deg);
+		}
+		25% {
+			transform: rotate(0.5deg);
+		}
+		50% {
+			transform: rotate(0eg);
+		}
+		75% {
+			transform: rotate(-0.5deg);
+		}
+		100% {
+			transform: rotate(0deg);
+		}
 	}
 </style>
