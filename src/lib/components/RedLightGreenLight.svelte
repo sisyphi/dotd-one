@@ -123,7 +123,7 @@
 	</div>
 	<div
 		id="btn"
-		class="mx-auto flex size-16 flex-none flex-col justify-center border-8 border-white
+		class="disable-selection mx-auto flex size-16 flex-none flex-col justify-center border-8 border-white
 		{isBtnDown ? 'translate-y-0 bg-white' : '-translate-y-2 bg-black'}"
 	>
 		<button
@@ -166,6 +166,16 @@
 		transform: translate(-50%, -50%);
 		z-index: 1;
 		transition: 0.35s all;
+	}
+
+	.disable-selection {
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		outline: 0;
 	}
 
 	.weak-hover-shake {
