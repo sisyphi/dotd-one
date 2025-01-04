@@ -42,7 +42,7 @@
 
 	setInterval(() => {
 		if (!isGameLost && !isGameWon) {
-			if (isBtnDown) val += 0.1;
+			if (isBtnDown) val += 0.15;
 		}
 	}, 100);
 
