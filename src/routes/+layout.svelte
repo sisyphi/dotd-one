@@ -15,18 +15,20 @@
 </script>
 
 <div class="flex h-svh flex-col">
-	<header class="flex h-24 flex-row justify-center border-b-8 border-white bg-black">
+	<header class="flex h-24 flex-none flex-row justify-center border-b-8 border-white bg-black">
 		<h1 class="self-center font-sans text-5xl font-thin text-white">
 			{'ONE'}<span class="text-2xl">{' by sisyphi'}</span>
 		</h1>
 	</header>
 	<div
-		class="h-full flex-1 bg-black {bgPattern}"
+		class="h-24 flex-1 flex-grow bg-black {bgPattern}"
 		style="background-position: {`${bgPosition * xDir}px ${bgPosition * yDir}px`};"
 	>
 		{@render children()}
 	</div>
-	<footer class="flex h-24 w-full flex-col justify-center border-t-8 border-white bg-black">
+	<footer
+		class="flex h-24 w-full flex-none flex-col justify-center border-t-8 border-white bg-black"
+	>
 		<p class="justify-center self-center font-sans text-2xl font-thin text-white">
 			finish all four to win.
 		</p>

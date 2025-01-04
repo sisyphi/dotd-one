@@ -8,25 +8,27 @@
 	let isGameWonK = $state(false);
 </script>
 
-<div class="flex flex-row items-center justify-center h-full gap-12">
+<div
+	class="flex h-full scale-50 flex-row items-center justify-center gap-8 py-8 md:scale-100 md:gap-12"
+>
 	<RedLightGreenLight key="d" bind:isGameWon={isGameWonD} />
 	<RedLightGreenLight key="f" bind:isGameWon={isGameWonF} />
 	<RedLightGreenLight key="j" bind:isGameWon={isGameWonJ} />
 	<RedLightGreenLight key="k" bind:isGameWon={isGameWonK} />
-	{#if isGameWonD && isGameWonF && isGameWonJ && isGameWonK}
-		<div
-			class="-top-12 h-svh w-svw fixed left-0 flex flex-row justify-center overflow-hidden pointer-events-none"
-		>
-			<Confetti
-				x={[-5, 5]}
-				y={[0, 0.1]}
-				size={30}
-				colorArray={['#ffffff']}
-				infinite
-				duration={5000}
-				amount={200}
-				fallDistance="100vh"
-			/>
-		</div>
-	{/if}
 </div>
+{#if isGameWonD && isGameWonF && isGameWonJ && isGameWonK}
+	<div
+		class="pointer-events-none fixed -top-12 left-0 flex h-svh w-svw flex-row justify-center overflow-hidden"
+	>
+		<Confetti
+			x={[-5, 5]}
+			y={[0, 0.1]}
+			size={30}
+			colorArray={['#ffffff']}
+			infinite
+			duration={5000}
+			amount={200}
+			fallDistance="100svh"
+		/>
+	</div>
+{/if}

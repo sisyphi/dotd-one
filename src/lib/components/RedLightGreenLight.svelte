@@ -19,7 +19,7 @@
 		isGameWon = $bindable(false)
 	}: PropsType = $props();
 
-	let isKeyDown: boolean = $state(false);
+	let isBtnDown: boolean = $state(false);
 	let val: number = $state(0);
 
 	let isEyeOpen: boolean = $state(true);
@@ -30,19 +30,19 @@
 
 	function handleKeydown(event: { key: any }) {
 		if (event.key === key) {
-			isKeyDown = true;
+			isBtnDown = true;
 		}
 	}
 
 	function handleKeyup(event: { key: any }) {
 		if (event.key === key) {
-			isKeyDown = false;
+			isBtnDown = false;
 		}
 	}
 
 	setInterval(() => {
 		if (!isGameLost && !isGameWon) {
-			if (isKeyDown) val += 0.5;
+			if (isBtnDown) val += 0.1;
 		}
 	}, 100);
 
@@ -62,7 +62,7 @@
 
 	// Game handler
 	$effect(() => {
-		if (isKeyDown) {
+		if (isBtnDown) {
 			if (isEyeOpen && !(isEyeOpen && eyeCooldown > timer - coyoteTime)) {
 				isGameLost = true;
 			}
@@ -90,7 +90,7 @@
 
 <div
 	id="container"
-	class="flex h-fit flex-col gap-8 border-8 border-white bg-black p-8
+	class="flex h-full flex-col gap-8 border-8 border-white bg-black p-6
 	{isGameLost || isGameWon
 		? ''
 		: Math.round((val / maxVal) * 100) > 75
@@ -101,7 +101,7 @@
 >
 	<div
 		id="eye"
-		class="relative mx-auto size-24 overflow-hidden rounded-full border-8 border-white p-4
+		class="relative mx-auto size-24 flex-none overflow-hidden rounded-full border-8 border-white p-4
 		{isGameWon ? 'bg-black' : 'bg-white'}"
 	>
 		<div id="eye-lid" class="eye-lid {eyeLidStyle}"></div>
@@ -113,22 +113,34 @@
 	</div>
 	<div
 		id="progress-container"
-		class="w-fit flex flex-col-reverse h-64 p-2 mx-auto border-8 border-white"
+		class="mx-auto flex w-fit flex-grow flex-col-reverse border-8 border-white p-2"
 	>
 		<div
 			id="progress-val"
-			class="w-4 transition-all bg-white"
+			class="w-4 bg-white transition-all"
 			style="height: {Math.min(Math.round((val / maxVal) * 100), 100)}%;"
 		></div>
 	</div>
 	<div
 		id="btn"
-		class="mx-auto flex size-16 flex-col justify-center border-8 border-white
-		{isKeyDown ? 'translate-y-0 bg-white' : '-translate-y-2 bg-black'}"
+		class="mx-auto flex size-16 flex-none flex-col justify-center border-8 border-white
+		{isBtnDown ? 'translate-y-0 bg-white' : '-translate-y-2 bg-black'}"
 	>
 		<button
 			class="font-sans text-3xl font-thin
-			{isKeyDown ? 'text-black' : 'text-white'}"
+			{isBtnDown ? 'text-black' : 'text-white'}"
+			ontouchstart={() => {
+				isBtnDown = true;
+			}}
+			ontouchend={() => {
+				isBtnDown = false;
+			}}
+			onmousedown={() => {
+				isBtnDown = true;
+			}}
+			onmouseup={() => {
+				isBtnDown = false;
+			}}
 		>
 			{key.toUpperCase()}
 		</button>
