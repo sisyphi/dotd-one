@@ -27,13 +27,16 @@
 		{@render children()}
 	</div>
 	<footer
-		class="flex h-24 w-full flex-none flex-col justify-center border-t-8 border-white bg-black"
+		class="flex h-36 w-full flex-none flex-col justify-center border-t-8 border-white bg-black"
 	>
 		<p class="justify-center self-center font-sans text-2xl font-thin text-white">
-			finish all four to win.
+			press the buttons to fill the bars.
 		</p>
 		<p class="justify-center self-center font-sans text-2xl font-thin text-white">
-			reload page to play again.
+			only press when the eyes are closed.
+		</p>
+		<p class="justify-center self-center font-sans text-2xl font-thin text-white">
+			reload the page to play again.
 		</p>
 	</footer>
 </div>
